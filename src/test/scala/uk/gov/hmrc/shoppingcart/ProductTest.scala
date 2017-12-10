@@ -5,7 +5,7 @@ import org.scalatest.{FlatSpec, Matchers}
 /**
   * Created by Mohan Dolla on 10/12/2017.
   */
-class CheckoutSpec extends FlatSpec with Matchers {
+class ProductSpec extends FlatSpec with Matchers {
 
   "A Product List" should "compute its size correctly" in {
     List.empty[Product].size should be (0)

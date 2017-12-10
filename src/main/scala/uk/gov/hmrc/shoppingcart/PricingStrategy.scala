@@ -1,7 +1,7 @@
 package uk.gov.hmrc.shoppingcart
 
 /**
-  * Created by Mohan Rao on 10/12/2017.
+  * Created by Mohan Dolla on 10/12/2017.
   */
 trait Pricing {
   def total(cart: ShoppingCart): Long
@@ -21,3 +21,20 @@ object RegularPricing extends Pricing {
     }.sum
   }
 }
+
+object OfferPricing extends Pricing {
+  private val regularPricing = RegularPricing
+
+  def total(cart: ShoppingCart): Long = {
+    cart.items.keySet.map {
+      key => val n = cart.items.get(key).getOrElse(0L)
+        val noItemsAfterDiscount = key match {
+          case Apple=> (n / 2) + (n % 2)
+          case Orange=> (n / 3) * 2 + (n % 3)
+          case _ => n
+        }
+        regularPricing.price(key) * noItemsAfterDiscount
+    }.sum
+  }
+}
+
